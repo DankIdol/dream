@@ -1,0 +1,95 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Scripts/3dCC.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Hands/000.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Icons/000.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/CumGun.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/crosshair.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/BombGun.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/SlowTime.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Shotgun.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scripts/Camera.gd" type="Script" id=9]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.5
+height = 0.5
+
+[sub_resource type="CapsuleShape" id=2]
+radius = 0.55
+
+[node name="3dCC" type="KinematicBody"]
+script = ExtResource( 1 )
+move_speed = 8
+acceleration = 1.1
+friction = 1.34
+
+[node name="UpperCollider" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.25, 0 )
+shape = SubResource( 1 )
+
+[node name="Camera" type="Camera" parent="UpperCollider"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1.09278e-08, 0.25 )
+current = true
+far = 50.0
+script = ExtResource( 9 )
+
+[node name="Guns" type="Spatial" parent="UpperCollider/Camera"]
+
+[node name="CumGun" parent="UpperCollider/Camera/Guns" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -0.5, -1.5 )
+
+[node name="Shotgun" parent="UpperCollider/Camera/Guns" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -0.5, -1.5 )
+
+[node name="BombGun" parent="UpperCollider/Camera/Guns" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, -0.5, -1.5 )
+
+[node name="TimeShift" parent="UpperCollider/Camera/Guns" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3658, -0.504229, -1.44892 )
+
+[node name="LowerCollider" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.25, 0 )
+shape = SubResource( 1 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="OmniLight" type="OmniLight" parent="."]
+omni_range = 12.4024
+
+[node name="Crosshair" type="Sprite" parent="."]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 5 )
+
+[node name="Hand" type="Sprite" parent="."]
+position = Vector2( 250, 650 )
+scale = Vector2( 8, 8 )
+texture = ExtResource( 2 )
+
+[node name="Icon" type="Sprite" parent="Hand"]
+modulate = Color( 1, 1, 1, 0.498039 )
+position = Vector2( -5.625, 11.25 )
+texture = ExtResource( 3 )
+
+[node name="ScoreLabel" type="Label" parent="."]
+margin_left = 126.827
+margin_top = 859.604
+margin_right = 166.827
+margin_bottom = 890.604
+text = "0
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HitArea" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="HitArea"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="AliveTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+[connection signal="area_entered" from="HitArea" to="." method="_on_HitArea_area_entered"]
+[connection signal="body_entered" from="HitArea" to="." method="_on_HitArea_body_entered"]
+[connection signal="timeout" from="AliveTimer" to="." method="_on_AliveTimer_timeout"]

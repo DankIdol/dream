@@ -1,14 +1,15 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scripts/3dCC.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Hands/000.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Icons/000.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/CumGun.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Assets/crosshair.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Crosshairs/crosshair_cum.png" type="Texture" id=5]
 [ext_resource path="res://Scenes/BombGun.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/SlowTime.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Shotgun.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scripts/Camera.gd" type="Script" id=9]
+[ext_resource path="res://crt_shader.shader" type="Shader" id=10]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.5
@@ -16,6 +17,14 @@ height = 0.5
 
 [sub_resource type="CapsuleShape" id=2]
 radius = 0.55
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 10 )
+shader_param/crt_curve = 0.0
+shader_param/crt_scan_line_color = 0.1
+shader_param/aperture_grille_rate = 0.8
+shader_param/rf_switch_esque_blur = 0.1
+shader_param/white_noise_rate = 0.05
 
 [node name="3dCC" type="KinematicBody"]
 script = ExtResource( 1 )
@@ -57,7 +66,7 @@ shape = SubResource( 1 )
 omni_range = 12.4024
 
 [node name="Crosshair" type="Sprite" parent="."]
-scale = Vector2( 4, 4 )
+scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 5 )
 
 [node name="Hand" type="Sprite" parent="."]
@@ -90,6 +99,16 @@ shape = SubResource( 2 )
 [node name="AliveTimer" type="Timer" parent="."]
 wait_time = 0.1
 autostart = true
+
+[node name="CRTShader" type="ColorRect" parent="."]
+material = SubResource( 3 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 [connection signal="area_entered" from="HitArea" to="." method="_on_HitArea_area_entered"]
 [connection signal="body_entered" from="HitArea" to="." method="_on_HitArea_body_entered"]
 [connection signal="timeout" from="AliveTimer" to="." method="_on_AliveTimer_timeout"]

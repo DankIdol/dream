@@ -2,8 +2,10 @@ extends Spatial
 
 const PELLET_COUNT := 10
 const ACCURACY := .2
+
 onready var aimcast = $RayCast
-var bullet = preload("res://Scenes/Pellet.tscn")
+
+var pellet = preload("res://Scenes/Pellet.tscn")
 var can_shoot := true
 var camera: Camera
 
@@ -17,12 +19,10 @@ func shoot(_type: String):
 	if can_shoot:
 		var random_vector = Vector3(1, 0, 0)
 		random_vector.x *= rand_range(-ACCURACY, ACCURACY)
-		#random_vector.y *= rand_range(-ACCURACY, ACCURACY)
-		#random_vector.z *= rand_range(-ACCURACY, ACCURACY)
 		var target = $target.global_transform.origin + random_vector
 		
 		for i in PELLET_COUNT:
-			var b = bullet.instance()
+			var b = pellet.instance()
 			b.global_transform.origin += Vector3(1, 0, 0) * rand_range(-ACCURACY, ACCURACY)
 			b.origin = global_transform.origin
 			add_child(b)

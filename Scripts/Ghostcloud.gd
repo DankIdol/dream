@@ -27,7 +27,6 @@ func get_input(delta):
 
 func damage(dmg: int):
 	health -= dmg
-	print(health)
 	if health <= 0:
 		$HitArea/CollisionShape.disabled = true
 		$AnimationPlayer.stop()

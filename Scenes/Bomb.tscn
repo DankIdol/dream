@@ -87,4 +87,5 @@ draw_pass_1 = SubResource( 8 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 shape = SubResource( 9 )
+
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

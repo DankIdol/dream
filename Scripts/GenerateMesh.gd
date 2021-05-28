@@ -1,10 +1,12 @@
 extends Spatial
 
-#https://coolors.co/071013-a71d31-477998-f7ff58-f6c0d0
+# https://coolors.co/071013-a71d31-477998-f7ff58-f6c0d0
 
 const color = Color(167/255.0, 29/255.0, 49/255.0)
 const dim = Vector2(100, 51)
 const height_level = 3
+
+var DBG = false
 
 var mesh = preload("res://Scenes/Mesh.tscn")
 
@@ -19,12 +21,19 @@ var noise_data = []
 
 
 func _ready():
+	var file = File.new()
+	file.open("res://settings.json", File.READ)
+	var settings = file.get_as_text()
+	if not settings == "":
+		settings = JSON.parse(settings).result
+		DBG = settings["debug"]
+	file.close()
+	
 	$AnimationPlayer.play("fade_in")
 	
 	# center the player
 	$"3dCC".global_transform.origin = Vector3(dim.x / 2, 3, -dim.y / 2)
 	
-#	Engine.time_scale = .5
 	ProjectSettings.set_setting("display/window/vsync/use_vsync", true)
 	
 	randomize()
@@ -40,12 +49,18 @@ func _ready():
 #			noise_data[(x * 10) + y] = noise.get_noise_2d(x, y)
 	
 	generate_map(0, 0)
+
+#	var f = File.new()
+#	f.open("res://verts.txt", File.WRITE)
+#	f.store_string(str(normals))
+#	print(len(normals))
 #	generate_walls()
 	
 func _physics_process(delta):
 	var player_pos = $"3dCC".global_transform.origin
 	for e in $Enemies.get_children():
-		e.target = player_pos
+		if not DBG:
+			e.target = player_pos
 		
 	if player_pos.y < -3:
 		get_tree().quit()
@@ -55,6 +70,11 @@ func _physics_process(delta):
 
 func death():
 	$AnimationPlayer.play_backwards("fade_in")
+
+
+
+
+# ------------------------------------------------------------------
 	
 func generate_map(_x, _y):
 	for x in dim.x:

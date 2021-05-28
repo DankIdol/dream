@@ -1,6 +1,5 @@
 extends Node2D
 
-const URL = "https://nightmare-score-server.herokuapp.com"
 const EXISTS = "/name"
 const globals = preload("res://Scripts/Globals.gd")
 
@@ -39,7 +38,7 @@ func _on_LineEdit_text_changed(new_text):
 
 func _on_Button_pressed():
 	if data["name"] != "":
-		_make_post_request(URL + EXISTS, data, false)
+		_make_post_request(globals.URL + EXISTS, data, false)
 
 
 func _on_WakeUpHeroku_request_completed(result, response_code, headers, body):

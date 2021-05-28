@@ -36,6 +36,13 @@ var icons = [
 	preload("res://Assets/Icons/003.png")  # time
 ]
 
+var crosshairs = [
+	preload("res://Assets/Crosshairs/crosshair_cum.png"),
+	preload("res://Assets/Crosshairs/crosshair_bomb.png"),
+	preload("res://Assets/Crosshairs/crosshair_shotgun.png"),
+	preload("res://Assets/Crosshairs/crosshair_time.png")
+]
+
 var weapons
 var window_scale: int
 var active_weapon := 0
@@ -53,6 +60,17 @@ func _ready():
 	$Crosshair.position = Vector2(dims.x / 2, dims.y / 2)
 	$Hand.position.y = dims.y - ((64 * window_scale) / 2)
 	$Hand.scale = Vector2(window_scale, window_scale)
+	
+	var hand_y = $Hand.position.y
+	var hand_animation = Animation.new()
+	var track_index = hand_animation.add_track(Animation.TYPE_VALUE)
+	hand_animation.track_set_path(track_index, "Hand:position:y")
+	hand_animation.track_insert_key(track_index, 0.0, hand_y)
+	hand_animation.track_insert_key(track_index, 0.2, hand_y + 50)
+	hand_animation.track_insert_key(track_index, 0.4, hand_y)
+	hand_animation.length = 0.4
+	hand_animation.loop = true
+	$AnimationPlayer.add_animation("hand_bob", hand_animation)
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	$Tween.connect("tween_all_completed", self, "_on_tween_all_completed")
@@ -136,6 +154,7 @@ func _process_input(delta):
 		
 		weapons[3].visible = false
 		weapons[active_weapon].visible = true
+		swap_crosshair(crosshairs[active_weapon])
 			
 	if Input.is_action_just_released("scroll_down"):
 		if hand_sprite > 1:
@@ -149,6 +168,7 @@ func _process_input(delta):
 		
 		weapons[3].visible = false
 		weapons[active_weapon].visible = true
+		swap_crosshair(crosshairs[active_weapon])
 	
 	# WASD
 	input_dir = Vector3(Input.get_action_strength("d") - Input.get_action_strength("a"), 
@@ -200,6 +220,8 @@ func _process_movement(delta):
 			velocity = velocity.normalized() * (move_speed/2 if crouching else move_speed)
 		velocity.y = ((Vector3(velocity.x, 0, velocity.z).dot(collision.normal)) * -1)
 		velocity.y -= 1 + (1+int(velocity.y < 0) * .3)
+		if not $AnimationPlayer.is_playing():
+			$AnimationPlayer.play("hand_bob")
 
 	#idle state
 	if state == State.IDLE && frames < HOP_FRAMES + JUMP_FRAMES:
@@ -209,6 +231,7 @@ func _process_movement(delta):
 		if velocity.length() > .5:
 			velocity /= friction
 			velocity.y = ((Vector3(velocity.x, 0, velocity.z).dot(collision.normal)) * -1) - .0001
+		$AnimationPlayer.stop(true)
 
 	#air strafe
 	if state > 2:
@@ -247,6 +270,9 @@ func _process_movement(delta):
 			velocity = Vector3(velocity.x, velocity.y + ((Vector3(velocity.x, 0, velocity.z).dot(collision.normal)) * - 2) , velocity.z)
 		else:
 			velocity = velocity
+
+func swap_crosshair(crosshair):
+	$Crosshair.texture = crosshair
 
 func _on_HitArea_area_entered(area):
 	if area.is_in_group("death"):

@@ -27,4 +27,5 @@ shape = SubResource( 1 )
 visible = false
 mesh = SubResource( 2 )
 material/0 = null
+
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

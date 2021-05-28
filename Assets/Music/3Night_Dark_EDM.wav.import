@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/3Night_Dark_EDM.wav-63096c7dd2a277ef4988e72bf0d8e1ac.sample"
+
+[deps]
+
+source_file="res://Assets/Music/3Night_Dark_EDM.wav"
+dest_files=[ "res://.import/3Night_Dark_EDM.wav-63096c7dd2a277ef4988e72bf0d8e1ac.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

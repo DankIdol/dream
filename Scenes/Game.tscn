@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/GenerateMesh.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Deep Dusk Equirect.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Scenes/Monsters/Spearleg.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Monsters/Blob.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Spawner.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Fonts/font_tiny.tres" type="DynamicFont" id=8]
 
 [sub_resource type="PanoramaSky" id=1]
 panorama = ExtResource( 2 )
@@ -97,4 +98,24 @@ anims/fade_in = SubResource( 3 )
 
 [node name="Spawner" parent="." instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.6277, 5.87274, -20.23 )
-player = ExtResource( 3 )
+
+[node name="MusicInfoLabel" type="Label" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -72.0
+margin_right = 149.0
+custom_fonts/font = ExtResource( 8 )
+text = "Now playing:
+Music"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MusicInfoTimer" type="Timer" parent="MusicInfoLabel"]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="MusicInfoLabel/MusicInfoTimer" to="." method="_on_MusicInfoTimer_timeout"]

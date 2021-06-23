@@ -21,6 +21,9 @@ var noise_data = []
 
 
 func _ready():
+	var style = Globals.AUDIO.play_style("")
+	$MusicInfoLabel.text = "now playing:\n" + str(style)
+	
 	var file = File.new()
 	file.open("res://settings.json", File.READ)
 	var settings = file.get_as_text()
@@ -161,7 +164,5 @@ func createQuad(x,y):
 	for i in range(0, 3):
 		normals.push_back(normal)
 
-
-
-
-
+func _on_MusicInfoTimer_timeout():
+	$MusicInfoLabel.visible = false

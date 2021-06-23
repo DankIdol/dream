@@ -10,7 +10,6 @@ config_version=4
 
 _global_script_classes=[  ]
 _global_script_class_icons={
-
 }
 
 [application]
@@ -19,12 +18,16 @@ config/name="In My Dreams"
 run/main_scene="res://Scenes/NameInput.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Globals="*res://Scripts/Globals.gd"
+AudioPlayer="*res://Scenes/AudioPlayer.tscn"
+
 [display]
 
 window/size/width=1280
 window/size/height=720
 window/size/resizable=false
-window/size/fullscreen=true
 
 [input]
 

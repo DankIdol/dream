@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/1.mp3-ab2d54e04acef8ac6af6a2847a7c0853.mp3str"
+
+[deps]
+
+source_file="res://Assets/Music/Loops/Dramatic/1.mp3"
+dest_files=[ "res://.import/1.mp3-ab2d54e04acef8ac6af6a2847a7c0853.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

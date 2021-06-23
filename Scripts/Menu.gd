@@ -21,6 +21,8 @@ func _ready():
 	
 	$ScoreBoard.position.x = dims.x - 500 - 20
 	$ScoreBoard.position.y = dims.y - 500 - 20
+	
+	Globals.AUDIO.play_menu()
 
 func _process(delta):
 	if loader != null:

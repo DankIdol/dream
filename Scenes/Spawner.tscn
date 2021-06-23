@@ -1,4 +1,6 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scripts/Spawner.gd" type="Script" id=1]
 
 [sub_resource type="SphereMesh" id=1]
 
@@ -179,7 +181,14 @@ shader_param/Normals = 0.77
 shader_param/Ice_Texture = SubResource( 4 )
 
 [node name="Spawner" type="Spatial"]
+script = ExtResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = SubResource( 1 )
 material/0 = SubResource( 5 )
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]

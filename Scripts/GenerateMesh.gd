@@ -24,6 +24,9 @@ func _ready():
 	var style = Globals.AUDIO.play_style("")
 	$MusicInfoLabel.text = "now playing:\n" + str(style)
 	
+	for s in $Spawners.get_children():
+		s.monster_node = $Enemies
+	
 	var file = File.new()
 	file.open("res://settings.json", File.READ)
 	var settings = file.get_as_text()

@@ -15,7 +15,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Remain Dreaming"
+config/name="In My Dreams"
 run/main_scene="res://Scenes/NameInput.tscn"
 config/icon="res://icon.png"
 
@@ -24,6 +24,7 @@ config/icon="res://icon.png"
 window/size/width=1280
 window/size/height=720
 window/size/resizable=false
+window/size/fullscreen=true
 
 [input]
 

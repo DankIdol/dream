@@ -34,24 +34,24 @@ __meta__ = {
 }
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
-margin_right = 798.0
+margin_right = 621.0
 margin_bottom = 118.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Title" type="Label" parent="VBoxContainer/MarginContainer"]
-margin_right = 798.0
+margin_right = 621.0
 margin_bottom = 118.0
 custom_fonts/font = ExtResource( 1 )
-text = "remain dreaming"
+text = "in my dreams"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Play" type="Button" parent="VBoxContainer"]
 margin_top = 122.0
-margin_right = 798.0
+margin_right = 621.0
 margin_bottom = 187.0
 custom_styles/focus = ExtResource( 5 )
 custom_fonts/font = ExtResource( 2 )
@@ -64,7 +64,7 @@ __meta__ = {
 
 [node name="Leaderboard" type="Button" parent="VBoxContainer"]
 margin_top = 191.0
-margin_right = 798.0
+margin_right = 621.0
 margin_bottom = 256.0
 custom_styles/focus = ExtResource( 5 )
 custom_fonts/font = ExtResource( 2 )
@@ -74,7 +74,7 @@ align = 0
 
 [node name="Credits" type="Button" parent="VBoxContainer"]
 margin_top = 260.0
-margin_right = 798.0
+margin_right = 621.0
 margin_bottom = 325.0
 custom_styles/focus = ExtResource( 5 )
 custom_fonts/font = ExtResource( 2 )
@@ -84,7 +84,7 @@ align = 0
 
 [node name="Exit" type="Button" parent="VBoxContainer"]
 margin_top = 329.0
-margin_right = 798.0
+margin_right = 621.0
 margin_bottom = 394.0
 mouse_default_cursor_shape = 8
 custom_styles/focus = ExtResource( 5 )

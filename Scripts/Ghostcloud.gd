@@ -19,6 +19,8 @@ func _physics_process(delta):
 	get_input(delta)
 	velocity.y = 0
 	velocity = move_and_slide(velocity, Vector3.UP)
+	
+	self.global_transform.origin.y = 15
 
 func get_input(delta):
 	var vy = velocity.y

@@ -33,6 +33,7 @@ func shoot(_type: String):
 		
 		can_shoot = false
 		$Timer.start()
+		$AudioStreamPlayer3D.play()
 
 func _on_Timer_timeout():
 	can_shoot = true

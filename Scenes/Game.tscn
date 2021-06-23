@@ -84,7 +84,7 @@ transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 22.5347
 transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 24.586, 3.04901, -39.9207 )
 
 [node name="ghostcloud" parent="Enemies" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5442, 12.9125, -35.6173 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.544, 15, -35.617 )
 
 [node name="Blob" parent="Enemies" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.7681, 5.54193, -32.6233 )

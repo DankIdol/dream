@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/slowtime.wav-e309a034adeb5266e649ee63a633feba.sample"
+path="res://.import/cg1.wav-0432dd5ae137c2d1ed0136532538c64a.sample"
 
 [deps]
 
-source_file="res://Assets/SFX/slowtime.wav"
-dest_files=[ "res://.import/slowtime.wav-e309a034adeb5266e649ee63a633feba.sample" ]
+source_file="res://Assets/SFX/cg1.wav"
+dest_files=[ "res://.import/cg1.wav-0432dd5ae137c2d1ed0136532538c64a.sample" ]
 
 [params]
 

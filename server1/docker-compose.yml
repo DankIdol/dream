@@ -1,0 +1,25 @@
+version: "3.9"
+services:
+  web:
+    build: src/
+    ports:
+      - "9001:9001"
+    links:
+      - postgres
+    environment:
+      PORT: 9001
+      KEY: "sample_key"
+      PGHOST: "172.17.0.1"
+      PGUSER: admin
+      PGDATABASE: admin
+      PGPASSWORD: password
+      PGPORT: 5432
+  postgres:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: scores

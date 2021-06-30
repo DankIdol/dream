@@ -3,7 +3,7 @@ extends Spatial
 # https://coolors.co/071013-a71d31-477998-f7ff58-f6c0d0
 
 const color = Color(167/255.0, 29/255.0, 49/255.0)
-const dim = Vector2(100, 51)
+const dim = Vector2(100, 100)
 const height_level = 3
 
 var DBG = false
@@ -43,24 +43,12 @@ func _ready():
 	ProjectSettings.set_setting("display/window/vsync/use_vsync", true)
 	
 	randomize()
-	noise.seed = 1337
+	noise.seed = randi()
 	noise.octaves = 4
 	noise.period = 10.0
 	noise.persistence = 0.2
 	
-	# generate the entire map in advance
-#	noise_data.resize(dim.x * dim.y)
-#	for x in dim.x:
-#		for y in dim.y:
-#			noise_data[(x * 10) + y] = noise.get_noise_2d(x, y)
-	
 	generate_map(0, 0)
-
-#	var f = File.new()
-#	f.open("res://verts.txt", File.WRITE)
-#	f.store_string(str(normals))
-#	print(len(normals))
-#	generate_walls()
 	
 func _physics_process(delta):
 	var player_pos = $"3dCC".global_transform.origin
@@ -70,23 +58,23 @@ func _physics_process(delta):
 		
 	if player_pos.y < -3:
 		get_tree().quit()
-		
-	$Label.text = str(Engine.get_frames_per_second()) + " FPS\n"
+	
+	var fps = Engine.get_frames_per_second()
+	$Label.text = str(fps) + " FPS\n"
 	$Label.text += str(player_pos) + "\n"
+	
+	Globals.enemies_spawned = $Enemies.get_child_count()
+	Globals.current_fps = fps
 
 func death():
 	$AnimationPlayer.play_backwards("fade_in")
 
-
-
-
 # ------------------------------------------------------------------
-	
+
 func generate_map(_x, _y):
 	for x in dim.x:
 		for y in dim.y:
 			var value = noise.get_noise_2d(x + _x, y + _y)
-#			var value = noise_data[(x * 10) + y]
 			height_data[Vector2(x, y)] = value * height_level
 
 	for x in dim.x - 1:
@@ -114,7 +102,7 @@ func generate_map(_x, _y):
 	mesh_instance.mesh = tmpMesh
 	mesh_instance.get_collider().shape = shape
 	
-	mesh_instance.global_transform.origin = Vector3(_x, 0, _y)
+	#mesh_instance.global_transform.origin = Vector3(_x, 0, _y)
 	
 	add_child(mesh_instance)
 	

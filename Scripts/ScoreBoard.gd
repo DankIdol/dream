@@ -1,17 +1,16 @@
 extends Node2D
 
 const ALL = "/all"
-const globals = preload("res://Scripts/Globals.gd")
 const data = {
 	"name": "not_loaded"
 }
 
 func _ready():
 	var save = File.new()
-	save.open_encrypted_with_pass(globals.SAVEFILE, File.READ, globals.PASSWORD)
+	save.open_encrypted_with_pass(Globals.SAVEFILE, File.READ, Globals.PASSWORD)
 	data["name"] = save.get_as_text().strip_edges().strip_escapes()
 	save.close()
-	_make_post_request(globals.URL + ALL, data, false)
+	_make_post_request(Globals.URL + ALL, data, false)
 
 func _make_post_request(url, data_to_send, use_ssl):
 	var query = JSON.print(data_to_send)

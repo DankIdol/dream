@@ -4,7 +4,7 @@ export var gravity = Vector3.DOWN * 10
 export var speed = 4
 export var target: Vector3
 var velocity := Vector3.ZERO
-var health := 100
+var health := 60
 
 func _ready():
 	randomize()

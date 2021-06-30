@@ -23,9 +23,9 @@ func shoot(_type: String):
 		
 		for i in PELLET_COUNT:
 			var b = pellet.instance()
+			add_child(b)
 			b.global_transform.origin += Vector3(1, 0, 0) * rand_range(-ACCURACY, ACCURACY)
 			b.origin = global_transform.origin
-			add_child(b)
 			b.look_at(target, Vector3.UP)
 			b.active = true
 		

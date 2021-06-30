@@ -14,8 +14,8 @@ func swap():
 func shoot(type: String):
 	if can_shoot && type == "hold":
 		var b = bullet.instance()
-		b.origin = global_transform.origin
 		add_child(b)
+		b.origin = global_transform.origin
 		b.look_at($target.global_transform.origin, Vector3.UP)
 		b.active = true
 		can_shoot = false

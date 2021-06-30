@@ -12,8 +12,6 @@ script = ExtResource( 4 )
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 
-[node name="WakeUpHeroku" type="HTTPRequest" parent="."]
-
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_left = 50.0
 margin_top = 50.0
@@ -52,6 +50,5 @@ icon = ExtResource( 5 )
 flat = true
 
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]
-[connection signal="request_completed" from="WakeUpHeroku" to="." method="_on_WakeUpHeroku_request_completed"]
 [connection signal="text_changed" from="ColorRect/HBoxContainer/LineEdit" to="." method="_on_LineEdit_text_changed"]
 [connection signal="pressed" from="ColorRect/HBoxContainer/Button" to="." method="_on_Button_pressed"]

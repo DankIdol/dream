@@ -191,4 +191,10 @@ material/0 = SubResource( 5 )
 wait_time = 5.0
 autostart = true
 
+[node name="OmniLight" type="OmniLight" parent="."]
+visible = false
+light_energy = 0.8
+shadow_enabled = true
+omni_range = 12.0
+
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]

@@ -1,11 +1,8 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/GenerateMesh.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Deep Dusk Equirect.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/3dCC.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/Monsters/Ghostcloud.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/Monsters/Spearleg.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Monsters/Blob.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Spawner.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/Fonts/font_tiny.tres" type="DynamicFont" id=8]
 
@@ -73,21 +70,18 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 3, -25 )
 [node name="Spawners" type="Spatial" parent="."]
 
 [node name="Spawner" parent="Spawners" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.6277, 5.87274, -20.23 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 6, -90 )
+
+[node name="Spawner2" parent="Spawners" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 6, -10 )
+
+[node name="Spawner3" parent="Spawners" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 90, 6, -10 )
+
+[node name="Spawner4" parent="Spawners" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 90, 6, -90 )
 
 [node name="Enemies" type="Node" parent="."]
-
-[node name="SpearLeg" parent="Enemies" instance=ExtResource( 5 )]
-transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 22.5347, 3.04901, -39.9207 )
-
-[node name="SpearLeg2" parent="Enemies" instance=ExtResource( 5 )]
-transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 24.586, 3.04901, -39.9207 )
-
-[node name="ghostcloud" parent="Enemies" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.544, 15, -35.617 )
-
-[node name="Blob" parent="Enemies" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.7681, 5.54193, -32.6233 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0

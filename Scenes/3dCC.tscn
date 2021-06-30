@@ -39,7 +39,7 @@ shape = SubResource( 1 )
 [node name="Camera" type="Camera" parent="UpperCollider"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1.09278e-08, 0.25 )
 current = true
-far = 50.0
+far = 150.0
 script = ExtResource( 9 )
 
 [node name="Guns" type="Spatial" parent="UpperCollider/Camera"]

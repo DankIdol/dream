@@ -13,8 +13,8 @@ func shoot(type: String):
 		can_shoot = false
 		$BombIndicator.visible = false
 		var b = bomb.instance()
-		b.connect("explosion", self, "_on_Bomb_explosion")
 		add_child(b)
+		b.connect("explosion", self, "_on_Bomb_explosion")
 	if can_shoot && type == "hold":
 		$BombIndicator.visible = true
 

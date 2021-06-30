@@ -9,6 +9,7 @@ const HOP_FRAMES = 3
 export var mouse_y_sens = .1
 export var mouse_x_sens = .1
 export var move_speed = 10
+export var sprint_speed = 50
 export var acceleration = .5
 export var gravity = -10
 export var friction = 1.15
@@ -19,7 +20,9 @@ export var max_boost_multiplier = 2
 
 onready var camera = $UpperCollider/Camera
 var score = 0
+var can_sprint = true
 var dims: Vector2
+var tween = Tween.new()
 
 var hand_sprite = 1
 var hand_sprites = [
@@ -123,6 +126,13 @@ func _process_input(delta):
 #		state = State.JUMP
 	if Input.is_action_pressed("jump"):
 		global_transform.origin += Vector3(0, 1, 0)
+	
+	if Input.is_action_just_pressed("shift") and can_sprint:
+		tween.interpolate_property($UpperCollider/Camera, "fov", 70, 90, .5, Tween.TRANS_ELASTIC, Tween.EASE_IN_OUT)
+		$UpperCollider/Camera.fov = 90
+		move_speed = sprint_speed
+		can_sprint = false
+		$SprintTimer.start()
 		
 	if Input.is_action_pressed("left_click"):
 		$Hand.position.x = dims.x / 2
@@ -285,4 +295,10 @@ func _on_HitArea_body_entered(body):
 func _on_AliveTimer_timeout():
 	score += .1
 
+func _on_SprintTimer_timeout():
+	move_speed = 10
+	$SprintCooldownTimer.start()
+	tween.interpolate_property($UpperCollider/Camera, "fov", 90, 70, .5, Tween.TRANS_ELASTIC, Tween.EASE_IN_OUT)
 
+func _on_SprintCooldownTimer_timeout():
+	can_sprint = true

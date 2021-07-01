@@ -21,7 +21,7 @@ var noise_data = []
 
 
 func _ready():
-	var style = Globals.AUDIO.play_style("")
+	var style = Globals.AUDIO.play_style()
 	$MusicInfoLabel.text = "now playing:\n" + str(style)
 	
 	for s in $Spawners.get_children():

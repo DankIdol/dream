@@ -40,21 +40,24 @@ const loops = {
 	]
 }
 
-func set_volume(volume):
-	$AudioStreamPlayer.volume_db = volume
+func set_music_volume(volume):
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("MUSIC"), volume)
+func set_sfx_volume(volume):
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), volume)
 
 func play_menu():
 	$AudioStreamPlayer.stream = menu_music
 	$AudioStreamPlayer.play()
 
-func play_style(style) -> String:
+func play_style() -> String:
 	randomize()
+	var style = Globals.music_style
 	if ! style in loops.keys():
 		style = loops.keys()[randi() % len(loops)]
 	
-	var track = loops[style][randi() % len(loops[style])]
+	var idx = randi() % len(loops[style])
+	var track = loops[style][idx]
 	$AudioStreamPlayer.stream = track
 	$AudioStreamPlayer.play()
 	
 	return style
-	

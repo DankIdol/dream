@@ -128,11 +128,13 @@ func _process_input(delta):
 		global_transform.origin += Vector3(0, 1, 0)
 	
 	if Input.is_action_just_pressed("shift") and can_sprint:
-		tween.interpolate_property($UpperCollider/Camera, "fov", 70, 90, .5, Tween.TRANS_ELASTIC, Tween.EASE_IN_OUT)
+		tween.interpolate_property($UpperCollider/Camera, "fov", 70, 120, .5, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		$Sprint/SpeedLines.visible = true
+		$Sprint/SprintSoundPlayer.play()
 		$UpperCollider/Camera.fov = 90
 		move_speed = sprint_speed
 		can_sprint = false
-		$SprintTimer.start()
+		$Sprint/SprintTimer.start()
 		
 	if Input.is_action_pressed("left_click"):
 		$Hand.position.x = dims.x / 2
@@ -142,6 +144,7 @@ func _process_input(delta):
 		$Hand/Icon.visible = false
 		
 		if active_weapon == 3: # time
+			can_sprint = false
 			move_speed = 20
 		
 	if Input.is_action_just_released("left_click"):
@@ -151,7 +154,9 @@ func _process_input(delta):
 		$Hand.texture = hand_sprites[0]
 		$Hand/Icon.visible = true
 		
-		move_speed = 10
+		if active_weapon == 3: # time
+			can_sprint = true
+			move_speed = 10
 	
 	if Input.is_action_just_released("scroll_up"):
 		if hand_sprite < len(hand_sprites) - 1:
@@ -297,8 +302,9 @@ func _on_AliveTimer_timeout():
 
 func _on_SprintTimer_timeout():
 	move_speed = 10
-	$SprintCooldownTimer.start()
-	tween.interpolate_property($UpperCollider/Camera, "fov", 90, 70, .5, Tween.TRANS_ELASTIC, Tween.EASE_IN_OUT)
+	$Sprint/SpeedLines.visible = false
+	$Sprint/SprintCooldownTimer.start()
+	tween.reset_all()
 
 func _on_SprintCooldownTimer_timeout():
 	can_sprint = true

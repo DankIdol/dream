@@ -10,6 +10,7 @@ onready var AUDIO = get_node("/root/AudioPlayer")
 var current_fps = 0
 var enemies_spawned = 0
 var current_difficulty = 5
+var music_style = ""
 
 func reset():
 	current_fps = 0

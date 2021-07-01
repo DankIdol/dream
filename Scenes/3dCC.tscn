@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scripts/3dCC.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Hands/000.png" type="Texture" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://Scenes/Shotgun.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scripts/Camera.gd" type="Script" id=9]
 [ext_resource path="res://crt_shader.shader" type="Shader" id=10]
+[ext_resource path="res://Assets/Shaders/SpeedLines.png" type="Texture" id=11]
+[ext_resource path="res://Assets/SFX/woosh.wav" type="AudioStream" id=12]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.5
@@ -110,16 +112,34 @@ __meta__ = {
 wait_time = 0.1
 autostart = true
 
-[node name="SprintTimer" type="Timer" parent="."]
+[node name="Sprint" type="Node" parent="."]
+
+[node name="SprintTimer" type="Timer" parent="Sprint"]
 wait_time = 0.5
 one_shot = true
 
-[node name="SprintCooldownTimer" type="Timer" parent="."]
+[node name="SprintCooldownTimer" type="Timer" parent="Sprint"]
 wait_time = 5.0
 one_shot = true
+
+[node name="SpeedLines" type="TextureRect" parent="Sprint"]
+visible = false
+modulate = Color( 1, 1, 1, 0.188235 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 11 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SprintSoundPlayer" type="AudioStreamPlayer" parent="Sprint"]
+stream = ExtResource( 12 )
+volume_db = 10.0
+bus = "SFX"
 
 [connection signal="area_entered" from="HitArea" to="." method="_on_HitArea_area_entered"]
 [connection signal="body_entered" from="HitArea" to="." method="_on_HitArea_body_entered"]
 [connection signal="timeout" from="AliveTimer" to="." method="_on_AliveTimer_timeout"]
-[connection signal="timeout" from="SprintTimer" to="." method="_on_SprintTimer_timeout"]
-[connection signal="timeout" from="SprintCooldownTimer" to="." method="_on_SprintCooldownTimer_timeout"]
+[connection signal="timeout" from="Sprint/SprintTimer" to="." method="_on_SprintTimer_timeout"]
+[connection signal="timeout" from="Sprint/SprintCooldownTimer" to="." method="_on_SprintCooldownTimer_timeout"]

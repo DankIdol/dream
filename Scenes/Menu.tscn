@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Assets/Fonts/font_big.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Assets/Fonts/font_small.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Scripts/Menu.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/ScoreBoard.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Styles/Button.tres" type="StyleBox" id=5]
+[ext_resource path="res://Assets/SFX/metal-clash.wav" type="AudioStream" id=6]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 0.027451, 0.0627451, 0.0745098, 1, 0.654902, 0.113725, 0.192157, 0 )
@@ -108,6 +109,9 @@ __meta__ = {
 [node name="ScoreBoard" parent="." instance=ExtResource( 4 )]
 visible = false
 position = Vector2( 600, 0 )
+
+[node name="MenuHoverSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
 
 [connection signal="mouse_entered" from="VBoxContainer/Play" to="." method="_on_Play_mouse_entered"]
 [connection signal="mouse_exited" from="VBoxContainer/Play" to="." method="_on_Play_mouse_exited"]

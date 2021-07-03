@@ -39,6 +39,7 @@ func _process(delta):
 
 func _on_Play_mouse_entered():
 	$VBoxContainer/Play.icon = icons["play"]
+	$MenuHoverSoundPlayer.play()
 func _on_Play_mouse_exited():
 	$VBoxContainer/Play.icon = null
 func _on_Play_pressed():
@@ -49,6 +50,7 @@ func _on_Play_pressed():
 
 func _on_Leaderboard_mouse_entered():
 	$VBoxContainer/Leaderboard.icon = icons["leaderboard"]
+	$MenuHoverSoundPlayer.play()
 func _on_Leaderboard_mouse_exited():
 	$VBoxContainer/Leaderboard.icon = null
 func _on_Leaderboard_pressed():
@@ -56,6 +58,7 @@ func _on_Leaderboard_pressed():
 
 func _on_Credits_mouse_entered():
 	$VBoxContainer/Credits.icon = icons["credits"]
+	$MenuHoverSoundPlayer.play()
 func _on_Credits_mouse_exited():
 	$VBoxContainer/Credits.icon = null
 func _on_Credits_pressed():
@@ -63,6 +66,7 @@ func _on_Credits_pressed():
 
 func _on_Exit_mouse_entered():
 	$VBoxContainer/Exit.icon = icons["exit"]
+	$MenuHoverSoundPlayer.play()
 func _on_Exit_mouse_exited():
 	$VBoxContainer/Exit.icon = null
 func _on_Exit_pressed():
